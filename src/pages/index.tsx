@@ -27,12 +27,12 @@ type HomeProps = { // dentro do typescript, podemos fazer essa tipagem com type 
 }
 
 export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
-  const player = useContext(PlayerContext);
+  const { play } = useContext(PlayerContext);
   
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos {player}</h2>
+        <h2>Últimos lançamentos</h2>
 
         <ul>
           {latestEpisodes.map(episode => {
@@ -55,7 +55,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}> // o onClick tem que receber uma funcao. Nao podemos so chamar a funcao ai, porque senao vai estar executando e como parametro vai estar recebendo o retorno da funcao que eh void
                   <img src="/play-green.svg" alt="Tocar episódio" />
                 </button>
               </li>
